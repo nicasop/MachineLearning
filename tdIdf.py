@@ -1,0 +1,58 @@
+#### TF-IDF ####
+
+## LIBRERIAS ##
+import math
+import numpy as np
+
+def bagWords(dic,coleccion):
+    bWords = np.zeros((len(dic['tokens']),len(coleccion)))
+    for i in range (len(dic['tokens'])):
+        ocurrecia = dic['ocurrencias'][i]
+        for ocu in ocurrecia:
+            bWords[i][ocu[0]-1] = ocu[1]
+    return bWords
+
+def pesadoTF(term):
+    if term != 0:
+        return 1 + math.log10(term)
+    else:
+        return 0
+
+def documentF(matriz):
+    doFrecuen = []
+    for lista in matriz:
+        doFrecuen.append(conteo(lista))
+    return doFrecuen
+
+
+def conteo(lista):
+    cont = 0
+    for elemento in lista:
+        if elemento != 0:
+            cont += 1
+    return cont
+
+def matrizPTF(matriz):
+    for i in range(len(matriz)):
+        for j in range(len(matriz[0])):
+            matriz[i][j] = pesadoTF(matriz[i][j])
+    return matriz
+
+def IDF(df,N):
+    idf = []
+    for elemento in df:
+        idf.append(math.log10(N/elemento))
+    return idf
+
+def TFIDF(wtf,idf):
+    matriz = np.zeros((len(wtf),len(wtf[0])))
+    i = j = 0
+    while True:
+        matriz[i][j] = wtf[i][j]*idf[i]
+        j += 1
+        if j == len(wtf[0]):
+            j = 0
+            i += 1
+        if i == len(wtf):
+            break
+    return matriz
