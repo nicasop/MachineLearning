@@ -12,13 +12,13 @@ from nltk.stem.porter import PorterStemmer
 nltk.download('stopwords')
 
 ##funciones
-def limpiarDocumento (cole):    
+def limpiarDocumento (cole,idioma):    
     colecciontok=[]
     for documento in range (len(cole)):
         documentoaux = re.sub('[^A-Za-z0-9]+',' ', cole[documento])#eliminar caracteres especiales    
         documentoaux = documentoaux.lower()# poner todo en minúsculas
         documentoaux = documentoaux.split()# tokenización
-        documentoaux = quitarStopwords('es',documentoaux)# quitar stopwords
+        documentoaux = quitarStopwords(idioma,documentoaux)# quitar stopwords
         documentoaux = stemming(documentoaux)# stemming
         colecciontok.append(documentoaux)
     return colecciontok

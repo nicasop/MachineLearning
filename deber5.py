@@ -4,38 +4,63 @@ import numpy as np
 import nlp
 import jaccard
 import tdIdf as tdf
+import cosenoVectorial as cosV
 
-# d1 = 'dias de lluvia'
-# d2 = 'resbalo en un dia de lluvia'
-# coleccion = [d1.split(),d2.split()]
+#FUNCIONES
+# def matrizDistanciaPonderada(matriz1,matriz2,matriz3,ponderacines):
+#     i = j = 0
+#     while True:
 
-# print(coleccion)
-# print(jaccard.matrizJaccard(coleccion))
 
-d1 = 'LA CASA DEL ARBOL, DENTRO DEL ARBOL'
-d2 = 'ARBOLES RURALES, PARROQUIA RURAL'
-d3 = 'FLORA Y FAUNA, DE ARBOLES ECUATORIANOS DE ARBOLES ENDEMICOS'
-coleccion = [d1,d2,d3]
-coleccionLim = nlp.limpiarDocumento(coleccion)
-# print(coleccion)
-# print(coleccionLim)
 
-diccionario={'tokens':[],'ocurrencias':[]}
-diccionario['tokens']= nlp.indexacionToken(coleccionLim)
-diccionario['ocurrencias'] = nlp.ocurrencias(diccionario['tokens'],coleccionLim)
-print(diccionario['ocurrencias'])
-nlp.imprimirFII(diccionario['tokens'],diccionario['ocurrencias'])
 
-matriz = tdf.bagWords(diccionario,coleccion)
-# print(matriz)
-wtf = tdf.matrizPTF(matriz)
-print(wtf)
+##IMPORTAR DATOS
+papers = nlp.importarCSV('papers.csv')
+# titulos = papers['title'].tolist()
+keywords = papers['keywords'].tolist()
+# abstracts = papers['abstract'].tolist()
 
-dF = tdf.documentF(wtf)
-# print(dF)
+##NLP
+# titulosL = nlp.limpiarDocumento(titulos,'en')
+keywordsL = nlp.limpiarDocumento(keywords,'en')
+print(keywordsL[len(keywordsL)-1])
+print(jaccard.interseccion(keywordsL[len(keywordsL)-1],keywordsL[len(keywordsL)-1]))
+print(jaccard.union(keywordsL[len(keywordsL)-1],keywordsL[len(keywordsL)-1]))
+valor = jaccard.jaccard(keywordsL[len(keywordsL)-1],keywordsL[len(keywordsL)-1])
+print(valor)
+# abstractsL = nlp.limpiarDocumento(abstracts,'en')
 
-idf = tdf.IDF(dF,len(coleccionLim))
-print(idf)
+##JACCARD
+#TITULOS
+# matrizTit = jaccard.matrizJaccard(titulosL)
 
-tf_idf = tdf.TFIDF(wtf,idf)
-print(tf_idf)
+#KEYWORDS
+matrizKey = jaccard.matrizJaccard(keywordsL)
+print(matrizKey[len(matrizKey)-1][len(matrizKey)-1])
+
+##FULL INVERTED INDEX -- TF-IDF -- COSENO VECTORIAL
+# #FULL INVERTED INDEX
+# diccionario={'tokens':[],'ocurrencias':[]}
+# diccionario['tokens']= nlp.indexacionToken(abstractsL)
+# diccionario['ocurrencias'] = nlp.ocurrencias(diccionario['tokens'],abstractsL)
+# # nlp.imprimirFII(diccionario['tokens'],diccionario['ocurrencias'])
+
+# #TF-IDF
+# matriz = tdf.bagWords(diccionario,abstractsL)
+# # print(matriz)
+# wtf = tdf.matrizPTF(matriz)
+# # print(wtf)
+# dF = tdf.documentF(wtf)
+# # print(dF)
+# idf = tdf.IDF(dF,len(abstractsL))
+# # print(idf)
+# tf_idf = tdf.TFIDF(wtf,idf)
+# # print(tf_idf)
+
+# #Coseno Vectorial
+# matrizN = cosV.matrizNormal(tf_idf)
+# # print(matrizN)
+# # matrizDistanciaAbs = cosV.matrizDistacias(cosV.matrizNormal(tf_idf))
+# matrizAbs = cosV.matrizDistacias(matrizN)
+# print(matrizAbs)
+# ponderacion = [0.5,0.3,0.2]
