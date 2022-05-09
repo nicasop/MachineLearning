@@ -19,7 +19,6 @@ def vectorModulos(matriz):
 def matrizNormal(matriz):
     matrizNormal = np.zeros((len(matriz),len(matriz[0])))
     modulos = vectorModulos(matriz)
-    # print('Modulos: ',modulos)
     i = j = 0
     while True:
         matrizNormal[i][j] = matriz[i][j]/modulos[j]
