@@ -1,5 +1,3 @@
-# Integrantes: Diego Bedoya - Anthony Grijalva - Sebastian Sandoval - Alexis Villavicencio
-
 ##librerias
 import re
 from operator import index
@@ -80,8 +78,7 @@ def recuperarDatosHTML(enlace,etiqueta):
     tit = []
     for p in soup.find_all(etiqueta):
         tit.append(p.get_text())
-    titulos = tit[1:7]
-    return titulos
+    return tit
 
 def exportarCSV(nombre_file,coleccion):
     dic = {'coleccion': coleccion} 
