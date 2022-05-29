@@ -11,7 +11,7 @@ def limpiarDocumento (cole):
 
 def indexacionToken(coleccion):
     palabras=[]    
-    for documento in colecciontok:
+    for documento in coleccion:
         for token in documento:
             if token not in palabras:
                 palabras.append(token)
@@ -29,17 +29,17 @@ def tokenDoc(tok,colDoc):
     for doc in range (len(colDoc)):
         vaux1=[]
         if tok in colDoc[doc]:
-            vpos=[] 
             vaux1.append(doc+1)
-            vaux1.append(len(obtenPos(tok,colDoc[doc])))
-            vaux1.append(obtenPos(tok,colDoc[doc]))
+            vpos = obtenPos(tok,colDoc[doc])
+            vaux1.append(len(vpos))
+            vaux1.append(vpos)
             vaux.append(vaux1)
     return vaux
 
-def ocurrencias (dic):
+def ocurrencias (dic,coleccion):
     vec=[]
     for token in dic:
-        vec.append(tokenDoc(token,colecciontok))
+        vec.append(tokenDoc(token,coleccion))
     return vec
 
 def imprimirFII(vecT,vecO):
@@ -57,5 +57,5 @@ coleccion= ["To do is to be. To be is to do.",
 colecciontok=limpiarDocumento(coleccion)
 diccionario={'tokens':[],'ocurrencias':[]}
 diccionario['tokens']= indexacionToken(colecciontok)
-diccionario['ocurrencias']= ocurrencias(diccionario['tokens'])
+diccionario['ocurrencias']= ocurrencias(diccionario['tokens'],colecciontok)
 imprimirFII(diccionario['tokens'],diccionario['ocurrencias'])

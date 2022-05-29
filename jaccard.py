@@ -31,8 +31,10 @@ def union(a,b):
     return len(uni)
 
 def jaccard(a,b):
-    intersec = interseccion(a,b)  
-    uni = union(a,b) 
+    intersec = len(np.intersect1d(a,b))   
+    uni = len(np.union1d(a,b)) 
+    # intersec = interseccion(a,b)
+    # uni = union(a,b)
     return round(intersec/uni,2)
 
 # def matrizJaccard(coleccion):
