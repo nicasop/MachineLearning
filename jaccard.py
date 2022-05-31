@@ -38,12 +38,11 @@ def jaccard(a,b):
     return round(intersec/uni,2)
 
 # def matrizJaccard(coleccion):
-#     matriz = []
-#     for doc in coleccion:
-#         aux = []
-#         for doc1 in coleccion:
-#             aux.append(jaccard(doc,doc1))
-#         matriz.append(aux)
+#     matriz = np.zeros((len(coleccion),len(coleccion)))
+#     for i in range(len(coleccion)):
+#         for j in range(len(coleccion)):
+#             if matriz[i][j] == 0:
+#                 matriz[i][j] = matriz[j][i] = jaccard(coleccion[i],coleccion[j])
 #     return matriz
 
 def matrizJaccard(coleccion):
