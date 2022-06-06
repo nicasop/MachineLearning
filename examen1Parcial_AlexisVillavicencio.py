@@ -1,3 +1,6 @@
+#Alexis Villavicencio
+
+##Librerias
 import pandas as pd
 import re
 from operator import index
