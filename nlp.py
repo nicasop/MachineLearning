@@ -7,13 +7,13 @@ import pandas as pd
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-nltk.download('stopwords')
+# nltk.download('stopwords')
 
 ##funciones
 def limpiarDocumento (cole,idioma):    
     colecciontok=[]
-    for documento in range (len(cole)):
-        documentoaux = re.sub('[^A-Za-z0-9]+',' ', cole[documento])#eliminar caracteres especiales    
+    for documento in cole:
+        documentoaux = re.sub('[^A-Za-z0-9]+',' ', documento)#eliminar caracteres especiales    
         documentoaux = documentoaux.lower()# poner todo en minúsculas
         documentoaux = documentoaux.split()# tokenización
         documentoaux = quitarStopwords(idioma,documentoaux)# quitar stopwords
@@ -22,14 +22,15 @@ def limpiarDocumento (cole,idioma):
     return colecciontok
 
 def quitarStopwords(tipo,documento):
+    documentoLimpio = []
     if tipo == 'en':
         n = stopwords.words("english")
     elif tipo == 'es':
         n = stopwords.words("spanish")
     for token in documento:
-        if token in n:
-            documento.remove(token)
-    return documento
+        if token not in n:
+            documentoLimpio.append(token)
+    return documentoLimpio
 
 def stemming(documento):
     stemmer = PorterStemmer()
@@ -59,8 +60,9 @@ def tokenDoc(tok,colDoc):
         vaux1=[]
         if tok in colDoc[doc]:
             vaux1.append(doc+1)
-            vaux1.append(len(obtenPos(tok,colDoc[doc])))
-            vaux1.append(obtenPos(tok,colDoc[doc]))
+            posiciones = obtenPos(tok,colDoc[doc])
+            vaux1.append(len(posiciones))
+            vaux1.append(posiciones)
             vaux.append(vaux1)
     return vaux
 
