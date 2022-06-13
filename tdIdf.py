@@ -32,25 +32,25 @@ def documentF(matriz):
 #             cont += 1
 #     return cont
 
+# def matrizPTF(matriz):
+#     mPTF = np.zeros((len(matriz),len(matriz[0]))) 
+#     for i in range(len(matriz)):
+#         for j in range(len(matriz[0])):
+#             mPTF[i][j] = pesadoTF(matriz[i][j])
+#     return matriz
+
 def matrizPTF(matriz):
     mPTF = np.zeros((len(matriz),len(matriz[0]))) 
-    for i in range(len(matriz)):
-        for j in range(len(matriz[0])):
-            mPTF[i][j] = pesadoTF(matriz[i][j])
-    return matriz
-
-# def matrizPTF(matriz):
-    # mPTF = np.zeros((len(matriz),len(matriz[0]))) 
-    # i = j = 0
-    # while True:
-    #     mPTF[i][j] = pesadoTF(matriz[i][j])
-    #     j += 1
-    #     if j == len(matriz[0]):
-    #         j = 0
-    #         i += 1
-    #     if i == len(matriz):
-    #         break
-    # return mPTF
+    i = j = 0
+    while True:
+        mPTF[i][j] = pesadoTF(matriz[i][j])
+        j += 1
+        if j == len(matriz[0]):
+            j = 0
+            i += 1
+        if i == len(matriz):
+            break
+    return mPTF
 
 def IDF(df,N):
     idf = []

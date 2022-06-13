@@ -4,7 +4,7 @@ from operator import index
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import pandas as pd
-import nltk
+# import nltk
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 # nltk.download('stopwords')
