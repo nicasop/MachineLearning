@@ -1,5 +1,4 @@
 #### LIBRERIAS ####
-import math
 import numpy as np
 import nlp
 import jaccard
@@ -7,19 +6,19 @@ import tdIdf as tdf
 import cosenoVectorial as cosV
 import time
 
-#FUNCIONES
-def matrizDistanciaPonderada(matriz1,matriz2,matriz3,ponderacines):
-    matrizDistancias = np.zeros((len(matriz1),len(matriz1)))
-    i = j = 0
-    while True:
-        matrizDistancias[i][j] = matriz1[i][j]*ponderacines[0] + matriz2[i][j]*ponderacines[1] + matriz3[i][j]*ponderacines[2]
-        j += 1
-        if j ==  len(matriz1):
-            j = 0
-            i += 1
-        if i == len(matriz1):
-            break
-    return matrizDistancias
+# #FUNCIONES
+# def matrizDistanciaPonderada(matriz1,matriz2,matriz3,ponderacines):
+#     matrizDistancias = np.zeros((len(matriz1),len(matriz1)))
+#     i = j = 0
+#     while True:
+#         matrizDistancias[i][j] = matriz1[i][j]*ponderacines[0] + matriz2[i][j]*ponderacines[1] + matriz3[i][j]*ponderacines[2]
+#         j += 1
+#         if j ==  len(matriz1):
+#             j = 0
+#             i += 1
+#         if i == len(matriz1):
+#             break
+#     return matrizDistancias
 
 ##IMPORTAR DATOS
 start = time.process_time()
@@ -51,11 +50,12 @@ idf = tdf.IDF(dF,len(abstractsL))
 tf_idf = tdf.TFIDF(wtf,idf)
 #Coseno Vectorial
 matrizN = cosV.matrizNormal(tf_idf)
+print(matrizN)
 matrizAbs = cosV.matrizDistacias(matrizN)
 print('Matriz de distancias de los Abstracts\n',matrizAbs)
 #MATRIZ DE DISTACIAS
 ponderacion = [0.5,0.3,0.2]
-Distancias = matrizDistanciaPonderada(matrizAbs,matrizKey,matrizTit,ponderacion)
+Distancias = cosV.matrizDistanciaPonderada(matrizAbs,matrizKey,matrizTit,ponderacion)
 print('Matriz de distancias\n',Distancias)
 end = time.process_time()
 print('El tiempo de ejecución del sistema fue:',end-start)

@@ -1,6 +1,6 @@
 venv/
 *.csv
 __pycache__
-DEBER5-1.PY
 *.pyc
 prueba.py
+*-1.py

@@ -94,17 +94,3 @@ def imprimirFII(vecT,vecO):
     print('Full Inverted Index')
     for j in range (len(vecT)):
         print(vecT[j],'-->',vecO[j])
-
-
-# ## programa ##
-# coleccion = recuperarDatosHTML("https://openai.com/dall-e-2/","p")
-# #print('Datos recuperados de la página web',coleccion)
-# exportarCSV("deber4.csv",coleccion)
-# coleccionImp = importarCSV('deber4.csv')
-# #print('Datos recuperados desde el archivo CSV',coleccionImp['coleccion'].tolist())
-# datosImp = coleccionImp['coleccion'].tolist()
-# coleccionLim = limpiarDocumento(datosImp)
-# diccionario={'tokens':[],'ocurrencias':[]}
-# diccionario['tokens']= indexacionToken(coleccionLim)
-# diccionario['ocurrencias'] = ocurrencias(diccionario['tokens'],coleccionLim)
-# imprimirFII(diccionario['tokens'],diccionario['ocurrencias'])
