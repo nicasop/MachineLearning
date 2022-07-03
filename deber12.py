@@ -21,7 +21,7 @@ matriz = np.array([[944,0,5,3,0,12,14,1,1,0],
 #                      [3,4,207,4],
 #                      [6,12,4,177]])
 
-print(matriz)
+print('--------- Matriz de Confusión ----------\n',matriz,'\n')
 # print(matriz_P)
 
 # Funciones
